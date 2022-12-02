@@ -1,33 +1,43 @@
-const textarea = document.querySelector('textarea');
-textarea.addEventListener('keydown', function(event) {
-  // Check if the user pressed Meta+ENTER.
-  if (event.metaKey && event.keyCode === 13) {
-    // Read the text from the textarea and perform the command.
-    const text = textarea.value;
-    const command = parseCommand(text);
-    if (command.type === 'fetch') {
-      fetch(command.url).then(function(response) {
-        response.text().then(function(body) {
-          // Replace the textarea text with the body of the fetched webpage.
-          textarea.value = body;
-        });
-      });
-    }
-  }
-});
+function addToPrompt(prompt) {
+  $("textarea").val(prompt + $("textarea").val());
+}
 
-function parseCommand(text) {
-    // Parse the command from the text.
-    if (text.startsWith('/fetch')) {
-      var parts = text.split(' ');
-      if (parts.length < 2) {
-        return null;
-      }
-      return {
-        type: 'fetch',
-        url: parts[1]
-      };
-    } else {
-      // Handle other commands here.
-    }
-  }
+function addAndExecute(prompt) {
+  addToPrompt(prompt);
+  var anchor = $("textarea").parent();
+  anchor.find("button").click();
+}
+
+$(document).ready(function () {
+  var anchor = $("textarea").parent();
+
+  var container = $("<div></div>").css({
+    display: "flex",
+    flexDirection: "row-reverse",
+    gap: "10px",
+    marginTop: "10px",
+  });
+  anchor.after(container);
+
+  // Add buttons to container
+  const style = {
+    "font-size": "14px",
+    "font-weight": "bold",
+    "background-color": "#f2f2f2",
+    border: "none",
+    color: "#333",
+    padding: "8px 16px",
+    "border-radius": "5px",
+  };
+  var explainBtn = $("<button>Explain Code</button>")
+    .css(style)
+    .click(function () {
+      addAndExecute("Explain this code: ");
+    });
+  var findBugsBtn = $("<button>Find Bugs</button>")
+    .css(style)
+    .click(function () {
+      addAndExecute("Find bugs in this code: ");
+    });
+  container.append(explainBtn).append(findBugsBtn);
+});
