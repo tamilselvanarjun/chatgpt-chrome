@@ -2,6 +2,8 @@
 
 ChatGPT++ enhances the ChatGPT experience for coders.
 
+<img width="797" alt="Screenshot 2022-12-02 at 3 18 49 PM" src="https://user-images.githubusercontent.com/23818/205385060-fce554fc-f1f2-4f6b-93dc-f43b1809fa78.png">
+
 ## How to install it
 
 To install ChatGPT++, follow these steps:
