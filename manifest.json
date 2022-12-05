@@ -1,16 +1,13 @@
 {
+  "manifest_version": 2,
   "name": "ChatGPT++",
   "version": "1.0",
-  "manifest_version": 2,
-  "description": "Designed for coders, ChatGPT++ adds a useful toolbelt to your ChatGPT.",
-  "permissions": ["activeTab", "http://*/*", "https://*/*"],
+  "description": "A simple extension that adds a button to the Chrome toolbar.",
+  "permissions": ["activeTab"],
   "content_scripts": [
     {
-      "matches": ["https://chat.openai.com/chat"],
-      "js": ["jquery.js", "user.js"]
+      "matches": ["*://chat.openai.com/chat/*"],
+      "js": ["jquery.min.js", "content-script.js"]
     }
-  ],
-  "icons": {
-    "128": "chat-bubble-icon.svg"
-  }
+  ]
 }
